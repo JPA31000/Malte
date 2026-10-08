@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold tracking-wide">Stage Urbain Vitry - Malte</h1>
-                    <p class="text-xs text-indigo-300">Période : 08.09.2026 au 16.10.2026 | Application de Suivi de Mobilité</p>
+                    <p class="text-xs text-indigo-300">Période : 08.09.2026 au 16.10.2026 | Billets & Suivi de Mobilité</p>
                 </div>
             </div>
             <div class="flex items-center space-x-3">
@@ -28,10 +28,6 @@
                 <button onclick="exportData()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-2 rounded-lg font-medium shadow transition flex items-center space-x-1">
                     <i class="fa-solid fa-download"></i> <span>Exporter JSON</span>
                 </button>
-                <label class="bg-indigo-800 hover:bg-indigo-700 text-white text-xs px-3 py-2 rounded-lg font-medium shadow transition cursor-pointer flex items-center space-x-1">
-                    <i class="fa-solid fa-upload"></i> <span>Importer</span>
-                    <input type="file" id="importFile" onchange="importData(event)" class="hidden" accept=".json">
-                </label>
             </div>
         </div>
     </header>
@@ -47,9 +43,9 @@
                 <i class="fa-solid fa-chalkboard-user"></i>
                 <span>Professeurs & Accompagnateurs (2)</span>
             </button>
-            <button onclick="switchTab('rdv')" id="tab-btn-rdv" class="py-3 px-1 font-semibold text-slate-500 hover:text-indigo-700 focus:outline-none transition flex items-center space-x-2">
-                <i class="fa-solid fa-calendar-check"></i>
-                <span>Informations & Vols (Ryanair)</span>
+            <button onclick="switchTab('billets')" id="tab-btn-billets" class="py-3 px-1 font-semibold text-slate-500 hover:text-indigo-700 focus:outline-none transition flex items-center space-x-2">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Accès Billets & Vols</span>
             </button>
         </div>
     </div>
@@ -64,10 +60,10 @@
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                         <i class="fa-solid fa-search"></i>
                     </span>
-                    <input type="text" id="searchJeunes" onkeyup="filterJeunes()" placeholder="Filtrer par nom, entreprise, spécialité..." class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="text" id="searchJeunes" onkeyup="filterJeunes()" placeholder="Filtrer par nom, entreprise..." class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 </div>
                 <div class="text-xs text-slate-500 italic">
-                    Vol Ref : <strong>ZRFPPE</strong> | Départ TLS : 08/09/2026 | Retour MLA : 16/10/2026[cite: 2]
+                    Réservation Ryanair : <strong class="text-indigo-600">ZRFPPE</strong>[cite: 2]
                 </div>
             </div>
 
@@ -96,7 +92,7 @@
         <section id="section-profs" class="space-y-4 hidden">
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                 <div class="p-4 border-b border-slate-200 bg-slate-50 font-semibold text-slate-700 flex justify-between items-center">
-                    <span><i class="fa-solid fa-plane mr-2 text-indigo-600"></i> Vols & Séjours des Accompagnateurs (Réf Ryanair : O46U2D)[cite: 3]</span>
+                    <span><i class="fa-solid fa-plane mr-2 text-indigo-600"></i> Accompagnateurs (Référence Ryanair : <strong class="text-indigo-600">O46U2D</strong>)[cite: 3]</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-slate-200 text-sm">
@@ -106,6 +102,7 @@
                                 <th class="px-6 py-3 text-left">Date de Naissance</th>
                                 <th class="px-6 py-3 text-left">Vol Aller (13/10/2026)[cite: 3]</th>
                                 <th class="px-6 py-3 text-left">Vol Retour (16/10/2026)[cite: 3]</th>
+                                <th class="px-6 py-3 text-center">Billet / Infos</th>
                             </tr>
                         </thead>
                         <tbody id="profsTableBody" class="divide-y divide-slate-200 bg-white">
@@ -116,29 +113,49 @@
             </div>
         </section>
 
-        <!-- SECTION 3 : VOLS & INFOS GENERALES -->
-        <section id="section-rdv" class="space-y-4 hidden">
+        <!-- SECTION 3 : ACCÈS BILLETS & VOLS -->
+        <section id="section-billets" class="space-y-6 hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Carte Billets Stagiaires -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="text-lg font-bold text-indigo-900 flex items-center">
-                        <i class="fa-solid fa-plane mr-2 text-indigo-600"></i> Vol Stagiaires (Ref: ZRFPPE)[cite: 2]
-                    </h3>
-                    <ul class="space-y-2 text-sm text-slate-600">
-                        <li><strong>Aller (08/09/2026)[cite: 2] :</strong> Vol FR3043 | Toulouse (TLS) 06:10 $\rightarrow$ Malte (MLA) 08:30[cite: 2]</li>
-                        <li><strong>Retour (16/10/2026)[cite: 2] :</strong> Vol FR3044 | Malte (MLA) 06:10 $\rightarrow$ Toulouse (TLS) 08:35[cite: 2]</li>
-                        <li><strong>Bagages :</strong> 1 x bagage soute (20kg) inclus par passager[cite: 3]</li>
-                    </ul>
+                    <div class="flex items-center justify-between border-b pb-3">
+                        <h3 class="text-lg font-bold text-indigo-900 flex items-center">
+                            <i class="fa-solid fa-ticket mr-2 text-indigo-600"></i> Billets Stagiaires (6 Passagers)
+                        </h3>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-mono font-bold">Réf: ZRFPPE</span>[cite: 2]
+                    </div>
+                    <p class="text-sm text-slate-600"><strong>Email associé :</strong> lowcost@h24travel.com</p>
+                    <div class="bg-slate-50 p-4 rounded-lg space-y-2 text-sm">
+                        <p><strong>Aller (08/09/2026)[cite: 2] :</strong> Vol <strong>FR3043</strong> | Toulouse (TLS) 06:10 $\rightarrow$ Malte (MLA) 08:30[cite: 2]</p>
+                        <p><strong>Retour (16/10/2026)[cite: 2] :</strong> Vol <strong>FR3044</strong> | Malte (MLA) 06:10 $\rightarrow$ Toulouse (TLS) 08:35[cite: 2]</p>
+                        <p><strong>Bagages :</strong> 1 x bagage soute (20kg) inclus par passager[cite: 3]</p>
+                    </div>
+                    <div class="pt-2">
+                        <a href="https://www.ryanair.com/fr/fr/lp/check-in" target="_blank" class="block text-center bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition shadow">
+                            <i class="fa-solid fa-external-link-alt mr-1"></i> Gérer sur le site Ryanair (Enregistrement)
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Carte Billets Accompagnateurs -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="text-lg font-bold text-indigo-900 flex items-center">
-                        <i class="fa-solid fa-plane-circle-check mr-2 text-indigo-600"></i> Vol Accompagnateurs (Ref: O46U2D)[cite: 3]
-                    </h3>
-                    <ul class="space-y-2 text-sm text-slate-600">
-                        <li><strong>Aller (13/10/2026)[cite: 3] :</strong> Vol FR3043 | Toulouse (TLS) 06:10 $\rightarrow$ Malte (MLA) 08:30[cite: 3]</li>
-                        <li><strong>Retour (16/10/2026)[cite: 3] :</strong> Vol FR3044 | Malte (MLA) 06:10 $\rightarrow$ Toulouse (TLS) 08:35[cite: 3]</li>
-                        <li><strong>Bagages :</strong> 1 x bagage soute (20kg) inclus par passager[cite: 3]</li>
-                    </ul>
+                    <div class="flex items-center justify-between border-b pb-3">
+                        <h3 class="text-lg font-bold text-indigo-900 flex items-center">
+                            <i class="fa-solid fa-ticket mr-2 text-indigo-600"></i> Billets Accompagnateurs (2 Passagers)
+                        </h3>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-mono font-bold">Réf: O46U2D</span>[cite: 3]
+                    </div>
+                    <p class="text-sm text-slate-600"><strong>Email associé :</strong> lowcost@h24travel.com</p>
+                    <div class="bg-slate-50 p-4 rounded-lg space-y-2 text-sm">
+                        <p><strong>Aller (13/10/2026)[cite: 3] :</strong> Vol <strong>FR3043</strong> | Toulouse (TLS) 06:10 $\rightarrow$ Malte (MLA) 08:30[cite: 3]</p>
+                        <p><strong>Retour (16/10/2026)[cite: 3] :</strong> Vol <strong>FR3044</strong> | Malte (MLA) 06:10 $\rightarrow$ Toulouse (TLS) 08:35[cite: 3]</p>
+                        <p><strong>Bagages :</strong> 1 x bagage soute (20kg) inclus par passager[cite: 3]</p>
+                    </div>
+                    <div class="pt-2">
+                        <a href="https://www.ryanair.com/fr/fr/lp/check-in" target="_blank" class="block text-center bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition shadow">
+                            <i class="fa-solid fa-external-link-alt mr-1"></i> Gérer sur le site Ryanair (Enregistrement)
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -200,38 +217,13 @@
 
     <!-- Script Application -->
     <script>
-        // Données officielles extraites des fichiers PDF de confirmation de vol
         const defaultJeunesData = [
-            {
-                id: 1, nom: "FALL SEYE", prenom: "Dame", naissance: "05/11/2009", age: 17, sexe: "M", tel: "6.66.75.57.36", mail: "damef2009@gmail.com", spe: "BAC PRO TEB",
-                familleNom: "Tanti", famillePrenom: "Steve", familleVille: "HAZ ZEBBUG", familleAdresse: "28 dun karm psaila Street", familleTel: "356 9959 5641",
-                entrepriseNom: "ARCStudios", entrepriseTuteur: "Dr. Claude Busuttil", horaires: "Lundi – Vendredi : 9h30 - 16h30", tenue: "Casual soigné", task: "Assistance CAO / Architecture"
-            },
-            {
-                id: 2, nom: "MOUTONNET OLIVEIRA", prenom: "Yoni", naissance: "07/05/2009", age: 17, sexe: "M", tel: "766 112 084", mail: "yoni.oliveira31@gmail.com", spe: "BAC PRO TEB",
-                familleNom: "Tanti", famillePrenom: "Steve", familleVille: "HAZ ZEBBUG", familleAdresse: "28 dun karm psaila Street", familleTel: "356 9959 5641",
-                entrepriseNom: "ARCStudios", entrepriseTuteur: "Dr. Claude Busuttil", horaires: "Lundi – Vendredi : 9h30 - 16h30", tenue: "Casual soigné", task: "Assistance CAO / Architecture"
-            },
-            {
-                id: 3, nom: "NDIAYE", prenom: "Baba", naissance: "22/11/2008", age: 17, sexe: "M", tel: "764872927", mail: "Baba.stage08@gmail.com", spe: "BAC PRO TEB",
-                familleNom: "Borg", famillePrenom: "Mario", familleVille: "HAZ ZEBBUG", familleAdresse: "22 St.Anthony Street", familleTel: "356 9938 2328",
-                entrepriseNom: "Sara Grech Limited", entrepriseTuteur: "Mandy Farrell Aguis", horaires: "9am - 1pm", tenue: "Smart Casual", task: "Take measurements on site; Make simple hand sketches; Create floor plans in AutoCAD or Revit."
-            },
-            {
-                id: 4, nom: "WADE", prenom: "Diadie", naissance: "27/03/2009", age: 17, sexe: "M", tel: "7 66 28 90 98", mail: "wadediadie44@gmail.com", spe: "BAC PRO TEB",
-                familleNom: "Borg", famillePrenom: "Mario", familleVille: "HAZ ZEBBUG", familleAdresse: "22 St.Anthony Street", familleTel: "356 9938 2328",
-                entrepriseNom: "Ductman Ltd.", entrepriseTuteur: "Elise Kik", horaires: "Mon-Fri 8h00 - 16h30", tenue: "Safety Boots", task: "The intern will assist with Autocad preparation, creating visuals for customers"
-            },
-            {
-                id: 5, nom: "RIGOUSTE", prenom: "Noemy", naissance: "31/07/2008", age: 17, sexe: "F", tel: "7 49 47 10 24", mail: "nrigouste31@gmail.com", spe: "BAC PRO TEB",
-                familleNom: "Azzopardi", famillePrenom: "Kevin", familleVille: "HAZ ZEBBUG", familleAdresse: "18 Frott IL Hidma Triq Anthony Aquilina", familleTel: "356 7906 6065",
-                entrepriseNom: "ARCStudios", entrepriseTuteur: "Dr. Claude Busuttil", horaires: "Lundi – Vendredi : 9h30 - 16h30", tenue: "Casual soigné", task: "Assistance CAO / Architecture"
-            },
-            {
-                id: 6, nom: "ZINGILA", prenom: "Andreas", naissance: "12/03/2009", age: 17, sexe: "M", tel: "7 49 93 15 30", mail: "andreas.zingila0@gmail.com", spe: "BAC PRO TEB",
-                familleNom: "Azzopardi", famillePrenom: "Kevin", familleVille: "HAZ ZEBBUG", familleAdresse: "18 Frott IL Hidma Triq Anthony Aquilina", familleTel: "356 7906 6065",
-                entrepriseNom: "Sara Grech Limited", entrepriseTuteur: "Mandy Farrell Aguis", horaires: "9am - 1pm", tenue: "Smart Casual", task: "Take measurements on site; Make simple hand sketches."
-            }
+            { id: 1, nom: "FALL SEYE", prenom: "Dame", naissance: "05/11/2009", tel: "6.66.75.57.36", mail: "damef2009@gmail.com", familleNom: "Tanti", familleVille: "HAZ ZEBBUG", entrepriseNom: "ARCStudios", task: "Assistance CAO / Architecture" },
+            { id: 2, nom: "MOUTONNET OLIVEIRA", prenom: "Yoni", naissance: "07/05/2009", tel: "766 112 084", mail: "yoni.oliveira31@gmail.com", familleNom: "Tanti", familleVille: "HAZ ZEBBUG", entrepriseNom: "ARCStudios", task: "Assistance CAO / Architecture" },
+            { id: 3, nom: "NDIAYE", prenom: "Baba", naissance: "22/11/2008", tel: "764872927", mail: "Baba.stage08@gmail.com", familleNom: "Borg", familleVille: "HAZ ZEBBUG", entrepriseNom: "Sara Grech Limited", task: "Take measurements on site; Make simple hand sketches." },
+            { id: 4, nom: "WADE", prenom: "Diadie", naissance: "27/03/2009", tel: "7 66 28 90 98", mail: "wadediadie44@gmail.com", familleNom: "Borg", familleVille: "HAZ ZEBBUG", entrepriseNom: "Ductman Ltd.", task: "Autocad preparation, creating visuals" },
+            { id: 5, nom: "RIGOUSTE", prenom: "Noemy", naissance: "31/07/2008", tel: "7 49 47 10 24", mail: "nrigouste31@gmail.com", familleNom: "Azzopardi", familleVille: "HAZ ZEBBUG", entrepriseNom: "ARCStudios", task: "Assistance CAO / Architecture" },
+            { id: 6, nom: "ZINGILA", prenom: "Andreas", naissance: "12/03/2009", tel: "7 49 93 15 30", mail: "andreas.zingila0@gmail.com", familleNom: "Azzopardi", familleVille: "HAZ ZEBBUG", entrepriseNom: "Sara Grech Limited", task: "Take measurements on site; Make simple hand sketches." }
         ];
 
         const profsData = [
@@ -239,10 +231,10 @@
             { nom: "AMAT", prenom: "Jean Philippe", naissance: "04/06/1974", arrivee: "13/10/2026 (06:10 - Vol FR3043)", retour: "16/10/2026 (06:10 - Vol FR3044)" }
         ];
 
-        let jeunesData = JSON.parse(localStorage.getItem('vitry_jeunes_v2')) || defaultJeunesData;
+        let jeunesData = JSON.parse(localStorage.getItem('vitry_jeunes_v3')) || defaultJeunesData;
 
         function saveToStorage() {
-            localStorage.setItem('vitry_jeunes_v2', JSON.stringify(jeunesData));
+            localStorage.setItem('vitry_jeunes_v3', JSON.stringify(jeunesData));
         }
 
         function renderJeunes(data = jeunesData) {
@@ -256,11 +248,11 @@
                     <td class="px-6 py-4 font-semibold text-slate-900">${j.nom} ${j.prenom}</td>
                     <td class="px-6 py-4 text-slate-600">${j.naissance}</td>
                     <td class="px-6 py-4 text-slate-600">${j.tel || '-'}<br><span class="text-xs text-indigo-600">${j.mail || ''}</span></td>
-                    <td class="px-6 py-4 text-slate-600">${j.familleNom || '-'} ${j.famillePrenom || ''}</td>
+                    <td class="px-6 py-4 text-slate-600">${j.familleNom || '-'}</td>
                     <td class="px-6 py-4 font-medium text-indigo-700">${j.entrepriseNom || '-'}</td>
-                    <td class="px-6 py-4 text-center">
-                        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 p-2 rounded-lg text-xs font-semibold transition">
-                            <i class="fa-solid fa-eye"></i> Voir
+                    <td class="px-6 py-4 text-center space-x-1">
+                        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 p-2 rounded-lg text-xs font-semibold transition" title="Voir détails">
+                            <i class="fa-solid fa-eye"></i>
                         </button>
                     </td>
                 `;
@@ -279,6 +271,11 @@
                     <td class="px-6 py-4 text-slate-600">${p.naissance}</td>
                     <td class="px-6 py-4 text-slate-600">${p.arrivee}</td>
                     <td class="px-6 py-4 text-slate-600">${p.retour}</td>
+                    <td class="px-6 py-4 text-center">
+                        <a href="https://www.ryanair.com/fr/fr/lp/check-in" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition inline-block">
+                            <i class="fa-solid fa-ticket mr-1"></i> Billet (O46U2D)[cite: 3]
+                        </a>
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -288,130 +285,4 @@
             const query = document.getElementById('searchJeunes').value.toLowerCase();
             const filtered = jeunesData.filter(j => 
                 (j.nom && j.nom.toLowerCase().includes(query)) ||
-                (j.prenom && j.prenom.toLowerCase().includes(query)) ||
-                (j.entrepriseNom && j.entrepriseNom.toLowerCase().includes(query))
-            );
-            renderJeunes(filtered);
-        }
-
-        function switchTab(tab) {
-            ['jeunes', 'profs', 'rdv'].forEach(t => {
-                document.getElementById('section-' + t).classList.add('hidden');
-                document.getElementById('tab-btn-' + t).classList.remove('text-indigo-700', 'border-b-2', 'border-indigo-700');
-                document.getElementById('tab-btn-' + t).classList.add('text-slate-500');
-            });
-            document.getElementById('section-' + tab).classList.remove('hidden');
-            const activeBtn = document.getElementById('tab-btn-' + tab);
-            activeBtn.classList.remove('text-slate-500');
-            activeBtn.classList.add('text-indigo-700', 'border-b-2', 'border-indigo-700');
-        }
-
-        function openDetail(id) {
-            const j = jeunesData.find(item => item.id === id);
-            if (!j) return;
-            document.getElementById('modalTitle').innerText = `${j.nom} ${j.prenom} — Fiche Stagiaire`;
-            document.getElementById('modalContent').innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-                        <h4 class="font-bold text-indigo-900 border-b pb-1">Infos Jeune</h4>
-                        <p><strong>Naissance :</strong> ${j.naissance}</p>
-                        <p><strong>Téléphone :</strong> ${j.tel || '-'}</p>
-                        <p><strong>Email :</strong> ${j.mail || '-'}</p>
-                    </div>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-                        <h4 class="font-bold text-indigo-900 border-b pb-1">Famille d'Accueil</h4>
-                        <p><strong>Hôte :</strong> ${j.familleNom || '-'} ${j.famillePrenom || ''}</p>
-                        <p><strong>Ville :</strong> ${j.familleVille || '-'}</p>
-                        <p><strong>Adresse :</strong> ${j.familleAdresse || '-'}</p>
-                    </div>
-                </div>
-                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 mt-4">
-                    <h4 class="font-bold text-indigo-900 mb-1">Entreprise & Tâches</h4>
-                    <p><strong>Entreprise :</strong> ${j.entrepriseNom || '-'}</p>
-                    <p><strong>Tâches :</strong> ${j.task || '-'}</p>
-                </div>
-            `;
-            document.getElementById('btnDeleteStagiaire').setAttribute('onclick', `deleteStagiaire(${j.id})`);
-            document.getElementById('detailModal').classList.remove('hidden');
-            document.getElementById('detailModal').classList.add('flex');
-        }
-
-        function closeModal() {
-            document.getElementById('detailModal').classList.remove('flex');
-            document.getElementById('detailModal').classList.add('hidden');
-        }
-
-        function openAddModal() {
-            document.getElementById('addModal').classList.remove('hidden');
-            document.getElementById('addModal').classList.add('flex');
-        }
-
-        function closeAddModal() {
-            document.getElementById('addModal').classList.remove('flex');
-            document.getElementById('addModal').classList.add('hidden');
-        }
-
-        function saveNewStagiaire(event) {
-            event.preventDefault();
-            const newObj = {
-                id: Date.now(),
-                nom: document.getElementById('newNom').value.toUpperCase(),
-                prenom: document.getElementById('newPrenom').value,
-                naissance: document.getElementById('newNaiss').value,
-                entrepriseNom: document.getElementById('newEntNom').value,
-                task: "Nouveau stage"
-            };
-            jeunesData.push(newObj);
-            saveToStorage();
-            renderJeunes();
-            closeAddModal();
-            document.getElementById('addForm').reset();
-        }
-
-        function deleteStagiaire(id) {
-            if (confirm("Voulez-vous vraiment supprimer ce stagiaire ?")) {
-                jeunesData = jeunesData.filter(item => item.id !== id);
-                saveToStorage();
-                renderJeunes();
-                closeModal();
-            }
-        }
-
-        function exportData() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ jeunes: jeunesData, profs: profsData }, null, 2));
-            const dlAnchor = document.createElement('a');
-            dlAnchor.setAttribute("href", dataStr);
-            dlAnchor.setAttribute("download", "recap_mobilite_vitry.json");
-            document.body.appendChild(dlAnchor);
-            dlAnchor.click();
-            dlAnchor.remove();
-        }
-
-        function importData(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const parsed = JSON.parse(e.target.result);
-                    if (parsed.jeunes) {
-                        jeunesData = parsed.jeunes;
-                        saveToStorage();
-                        renderJeunes();
-                        alert("Données importées avec succès !");
-                    }
-                } catch(err) {
-                    alert("Erreur lors de l'importation.");
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        window.onload = function() {
-            saveToStorage();
-            renderJeunes();
-            renderProfs();
-        };
-    </script>
-</body>
-</html>
+                (j.prenom && j.pren
