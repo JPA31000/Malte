@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold tracking-wide">Stage Urbain Vitry - Malte</h1>
-                    <p class="text-xs text-indigo-300">Période : 08.09.2026 au 16.10.2026 | Billets & Suivi de Mobilité</p>
+                    <p class="text-xs text-indigo-300">Période : 08.09.2026 au 16.10.2026 | Suivi Global & Billets</p>
                 </div>
             </div>
             <div class="flex items-center space-x-3">
@@ -37,7 +37,7 @@
         <div class="flex border-b border-slate-300 space-x-8">
             <button onclick="switchTab('jeunes')" id="tab-btn-jeunes" class="py-3 px-1 font-semibold text-indigo-700 border-b-2 border-indigo-700 focus:outline-none transition flex items-center space-x-2">
                 <i class="fa-solid fa-user-graduate"></i>
-                <span>Jeunes Stagiaires (6)</span>
+                <span>Jeunes Stagiaires (<span id="countJeunesBadge">6</span>)</span>
             </button>
             <button onclick="switchTab('profs')" id="tab-btn-profs" class="py-3 px-1 font-semibold text-slate-500 hover:text-indigo-700 focus:outline-none transition flex items-center space-x-2">
                 <i class="fa-solid fa-chalkboard-user"></i>
@@ -45,7 +45,7 @@
             </button>
             <button onclick="switchTab('billets')" id="tab-btn-billets" class="py-3 px-1 font-semibold text-slate-500 hover:text-indigo-700 focus:outline-none transition flex items-center space-x-2">
                 <i class="fa-solid fa-ticket"></i>
-                <span>Accès Billets & Vols</span>
+                <span>Billets & Vols (Ryanair)</span>
             </button>
         </div>
     </div>
@@ -63,7 +63,7 @@
                     <input type="text" id="searchJeunes" onkeyup="filterJeunes()" placeholder="Filtrer par nom, entreprise..." class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 </div>
                 <div class="text-xs text-slate-500 italic">
-                    Réservation Ryanair : <strong class="text-indigo-600">ZRFPPE</strong>[cite: 2]
+                    Réservation Ryanair Stagiaires : <strong class="text-indigo-600">ZRFPPE</strong>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
         <section id="section-profs" class="space-y-4 hidden">
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                 <div class="p-4 border-b border-slate-200 bg-slate-50 font-semibold text-slate-700 flex justify-between items-center">
-                    <span><i class="fa-solid fa-plane mr-2 text-indigo-600"></i> Accompagnateurs (Référence Ryanair : <strong class="text-indigo-600">O46U2D</strong>)[cite: 3]</span>
+                    <span><i class="fa-solid fa-plane mr-2 text-indigo-600"></i> Accompagnateurs (Référence Ryanair : <strong class="text-indigo-600">O46U2D</strong>)</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-slate-200 text-sm">
@@ -100,9 +100,9 @@
                             <tr>
                                 <th class="px-6 py-3 text-left">Nom & Prénom</th>
                                 <th class="px-6 py-3 text-left">Date de Naissance</th>
-                                <th class="px-6 py-3 text-left">Vol Aller (13/10/2026)[cite: 3]</th>
-                                <th class="px-6 py-3 text-left">Vol Retour (16/10/2026)[cite: 3]</th>
-                                <th class="px-6 py-3 text-center">Billet / Infos</th>
+                                <th class="px-6 py-3 text-left">Vol Aller (13/10/2026)</th>
+                                <th class="px-6 py-3 text-left">Vol Retour (16/10/2026)</th>
+                                <th class="px-6 py-3 text-center">Billet</th>
                             </tr>
                         </thead>
                         <tbody id="profsTableBody" class="divide-y divide-slate-200 bg-white">
@@ -113,7 +113,7 @@
             </div>
         </section>
 
-        <!-- SECTION 3 : ACCÈS BILLETS & VOLS -->
+        <!-- SECTION 3 : BILLETS & VOLS -->
         <section id="section-billets" class="space-y-6 hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Carte Billets Stagiaires -->
@@ -122,13 +122,13 @@
                         <h3 class="text-lg font-bold text-indigo-900 flex items-center">
                             <i class="fa-solid fa-ticket mr-2 text-indigo-600"></i> Billets Stagiaires (6 Passagers)
                         </h3>
-                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-mono font-bold">Réf: ZRFPPE</span>[cite: 2]
+                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-mono font-bold">Réf: ZRFPPE</span>
                     </div>
                     <p class="text-sm text-slate-600"><strong>Email associé :</strong> lowcost@h24travel.com</p>
                     <div class="bg-slate-50 p-4 rounded-lg space-y-2 text-sm">
-                        <p><strong>Aller (08/09/2026)[cite: 2] :</strong> Vol <strong>FR3043</strong> | Toulouse (TLS) 06:10 $\rightarrow$ Malte (MLA) 08:30[cite: 2]</p>
-                        <p><strong>Retour (16/10/2026)[cite: 2] :</strong> Vol <strong>FR3044</strong> | Malte (MLA) 06:10 $\rightarrow$ Toulouse (TLS) 08:35[cite: 2]</p>
-                        <p><strong>Bagages :</strong> 1 x bagage soute (20kg) inclus par passager[cite: 3]</p>
+                        <p><strong>Aller (08/09/2026) :</strong> Vol <strong>FR3043</strong> | Toulouse (TLS) 06:10 $\rightarrow$ Malte (MLA) 08:30</p>
+                        <p><strong>Retour (16/10/2026) :</strong> Vol <strong>FR3044</strong> | Malte (MLA) 06:10 $\rightarrow$ Toulouse (TLS) 08:35</p>
+                        <p><strong>Bagages :</strong> 1 x bagage soute (20kg) inclus par passager</p>
                     </div>
                     <div class="pt-2">
                         <a href="https://www.ryanair.com/fr/fr/lp/check-in" target="_blank" class="block text-center bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition shadow">
@@ -143,13 +143,13 @@
                         <h3 class="text-lg font-bold text-indigo-900 flex items-center">
                             <i class="fa-solid fa-ticket mr-2 text-indigo-600"></i> Billets Accompagnateurs (2 Passagers)
                         </h3>
-                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-mono font-bold">Réf: O46U2D</span>[cite: 3]
+                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-mono font-bold">Réf: O46U2D</span>
                     </div>
                     <p class="text-sm text-slate-600"><strong>Email associé :</strong> lowcost@h24travel.com</p>
                     <div class="bg-slate-50 p-4 rounded-lg space-y-2 text-sm">
-                        <p><strong>Aller (13/10/2026)[cite: 3] :</strong> Vol <strong>FR3043</strong> | Toulouse (TLS) 06:10 $\rightarrow$ Malte (MLA) 08:30[cite: 3]</p>
-                        <p><strong>Retour (16/10/2026)[cite: 3] :</strong> Vol <strong>FR3044</strong> | Malte (MLA) 06:10 $\rightarrow$ Toulouse (TLS) 08:35[cite: 3]</p>
-                        <p><strong>Bagages :</strong> 1 x bagage soute (20kg) inclus par passager[cite: 3]</p>
+                        <p><strong>Aller (13/10/2026) :</strong> Vol <strong>FR3043</strong> | Toulouse (TLS) 06:10 $\rightarrow$ Malte (MLA) 08:30</p>
+                        <p><strong>Retour (16/10/2026) :</strong> Vol <strong>FR3044</strong> | Malte (MLA) 06:10 $\rightarrow$ Toulouse (TLS) 08:35</p>
+                        <p><strong>Bagages :</strong> 1 x bagage soute (20kg) inclus par passager</p>
                     </div>
                     <div class="pt-2">
                         <a href="https://www.ryanair.com/fr/fr/lp/check-in" target="_blank" class="block text-center bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition shadow">
@@ -231,10 +231,11 @@
             { nom: "AMAT", prenom: "Jean Philippe", naissance: "04/06/1974", arrivee: "13/10/2026 (06:10 - Vol FR3043)", retour: "16/10/2026 (06:10 - Vol FR3044)" }
         ];
 
-        let jeunesData = JSON.parse(localStorage.getItem('vitry_jeunes_v3')) || defaultJeunesData;
+        let jeunesData = JSON.parse(localStorage.getItem('vitry_jeunes_v5')) || defaultJeunesData;
 
         function saveToStorage() {
-            localStorage.setItem('vitry_jeunes_v3', JSON.stringify(jeunesData));
+            localStorage.setItem('vitry_jeunes_v5', JSON.stringify(jeunesData));
+            document.getElementById('countJeunesBadge').innerText = jeunesData.length;
         }
 
         function renderJeunes(data = jeunesData) {
@@ -258,6 +259,7 @@
                 `;
                 tbody.appendChild(tr);
             });
+            document.getElementById('countJeunesBadge').innerText = data.length;
         }
 
         function renderProfs() {
@@ -273,7 +275,7 @@
                     <td class="px-6 py-4 text-slate-600">${p.retour}</td>
                     <td class="px-6 py-4 text-center">
                         <a href="https://www.ryanair.com/fr/fr/lp/check-in" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition inline-block">
-                            <i class="fa-solid fa-ticket mr-1"></i> Billet (O46U2D)[cite: 3]
+                            <i class="fa-solid fa-ticket mr-1"></i> Billet (O46U2D)
                         </a>
                     </td>
                 `;
@@ -285,4 +287,114 @@
             const query = document.getElementById('searchJeunes').value.toLowerCase();
             const filtered = jeunesData.filter(j => 
                 (j.nom && j.nom.toLowerCase().includes(query)) ||
-                (j.prenom && j.pren
+                (j.prenom && j.prenom.toLowerCase().includes(query)) ||
+                (j.entrepriseNom && j.entrepriseNom.toLowerCase().includes(query))
+            );
+            renderJeunes(filtered);
+        }
+
+        function switchTab(tab) {
+            ['jeunes', 'profs', 'billets'].forEach(t => {
+                document.getElementById('section-' + t).classList.add('hidden');
+                document.getElementById('tab-btn-' + t).classList.remove('text-indigo-700', 'border-b-2', 'border-indigo-700');
+                document.getElementById('tab-btn-' + t).classList.add('text-slate-500');
+            });
+            document.getElementById('section-' + tab).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-btn-' + tab);
+            activeBtn.classList.remove('text-slate-500');
+            activeBtn.classList.add('text-indigo-700', 'border-b-2', 'border-indigo-700');
+        }
+
+        function openDetail(id) {
+            const j = jeunesData.find(item => item.id === id);
+            if (!j) return;
+            document.getElementById('modalTitle').innerText = `${j.nom} ${j.prenom} — Fiche & Billet`;
+            document.getElementById('modalContent').innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-indigo-900 border-b pb-1">Infos Stagiaire</h4>
+                        <p><strong>Naissance :</strong> ${j.naissance}</p>
+                        <p><strong>Téléphone :</strong> ${j.tel || '-'}</p>
+                        <p><strong>Email :</strong> ${j.mail || '-'}</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-indigo-900 border-b pb-1">Vol & Billet Ryanair</h4>
+                        <p><strong>Réf Réservation :</strong> <span class="font-mono bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded font-bold">ZRFPPE</span></p>
+                        <p><strong>Aller :</strong> 08/09/2026 (FR3043)</p>
+                        <p><strong>Retour :</strong> 16/10/2026 (FR3044)</p>
+                    </div>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 mt-4 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-indigo-900">Enregistrement Vol</h4>
+                        <p class="text-xs text-slate-600">Accédez directement à la gestion du billet sur Ryanair.</p>
+                    </div>
+                    <a href="https://www.ryanair.com/fr/fr/lp/check-in" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow transition">
+                        <i class="fa-solid fa-external-link-alt mr-1"></i> Ouvrir le Billet
+                    </a>
+                </div>
+            `;
+            document.getElementById('btnDeleteStagiaire').setAttribute('onclick', `deleteStagiaire(${j.id})`);
+            document.getElementById('detailModal').classList.remove('hidden');
+            document.getElementById('detailModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('flex');
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        function openAddModal() {
+            document.getElementById('addModal').classList.remove('hidden');
+            document.getElementById('addModal').classList.add('flex');
+        }
+
+        function closeAddModal() {
+            document.getElementById('addModal').classList.remove('flex');
+            document.getElementById('addModal').classList.add('hidden');
+        }
+
+        function saveNewStagiaire(event) {
+            event.preventDefault();
+            const newObj = {
+                id: Date.now(),
+                nom: document.getElementById('newNom').value.toUpperCase(),
+                prenom: document.getElementById('newPrenom').value,
+                naissance: document.getElementById('newNaiss').value,
+                entrepriseNom: document.getElementById('newEntNom').value,
+                task: "Nouveau stage"
+            };
+            jeunesData.push(newObj);
+            saveToStorage();
+            renderJeunes();
+            closeAddModal();
+            document.getElementById('addForm').reset();
+        }
+
+        function deleteStagiaire(id) {
+            if (confirm("Voulez-vous vraiment supprimer ce stagiaire ?")) {
+                jeunesData = jeunesData.filter(item => item.id !== id);
+                saveToStorage();
+                renderJeunes();
+                closeModal();
+            }
+        }
+
+        function exportData() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ jeunes: jeunesData, profs: profsData }, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "recap_mobilite_vitry.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        window.onload = function() {
+            saveToStorage();
+            renderJeunes();
+            renderProfs();
+        };
+    </script>
+</body>
+</html>
